@@ -1,30 +1,34 @@
-from typing import Optional
-from pydantic import BaseModel, Field
+from typing import Optional, Any
+from pydantic import BaseModel, Field, validator, field_validator
+import re
 
 class ExtractionResult(BaseModel):
-    id: str = Field(description="Unique identifier for the email")
-    product_line: Optional[str] = Field(None, description="Product line (e.g., pl_sea_import_lcl, pl_sea_export_lcl)")
-    origin_port_code: Optional[str] = Field(None, description="5-letter UN/LOCODE for origin port")
-    origin_port_name: Optional[str] = Field(None, description="Canonical name of the origin port")
-    destination_port_code: Optional[str] = Field(None, description="5-letter UN/LOCODE for destination port")
-    destination_port_name: Optional[str] = Field(None, description="Canonical name of the destination port")
-    incoterm: Optional[str] = Field("FOB", description="Incoterm (e.g., FOB, CIF). Defaults to FOB.")
-    cargo_weight_kg: Optional[float] = Field(None, description="Total cargo weight in kg")
-    cargo_cbm: Optional[float] = Field(None, description="Total cargo volume in CBM")
-    is_dangerous: Optional[bool] = Field(False, description="Whether the shipment contains dangerous goods")
+    """Data model for shipping email extraction results."""
+    id: str = Field(..., description="Unique email identifier")
+    reasoning: Optional[str] = Field(None, description="AI's internal logic for extraction")
+    product_line: Optional[str] = Field(None, pattern=r"^pl_sea_(import|export)_lcl$")
+    origin_port_code: Optional[str] = Field(None, min_length=5, max_length=5)
+    origin_port_name: Optional[str] = Field(None)
+    destination_port_code: Optional[str] = Field(None, min_length=5, max_length=5)
+    destination_port_name: Optional[str] = Field(None)
+    incoterm: Optional[str] = Field("FOB")
+    cargo_weight_kg: Optional[float] = Field(None, ge=0)
+    cargo_cbm: Optional[float] = Field(None, ge=0)
+    is_dangerous: bool = Field(False)
 
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "id": "EMAIL_001",
-                "product_line": "pl_sea_import_lcl",
-                "origin_port_code": "HKHKG",
-                "origin_port_name": "Hong Kong",
-                "destination_port_code": "INMAA",
-                "destination_port_name": "Chennai",
-                "incoterm": "FOB",
-                "cargo_weight_kg": 100.50,
-                "cargo_cbm": 5.0,
-                "is_dangerous": False
-            }
-        }
+    @field_validator("incoterm")
+    @classmethod
+    def normalize_incoterm(cls, v: Optional[str]) -> str:
+        if not v or not isinstance(v, str):
+            return "FOB"
+        valid_incoterms = {"FOB", "CIF", "CFR", "EXW", "DDP", "DAP", "FCA", "CPT", "CIP", "DPU"}
+        upper_v = v.strip().upper()
+        return upper_v if upper_v in valid_incoterms else "FOB"
+
+    @field_validator("cargo_weight_kg", "cargo_cbm")
+    @classmethod
+    def round_numeric(cls, v: Optional[float]) -> Optional[float]:
+        if v is not None:
+            return round(float(v), 2)
+        return v
+

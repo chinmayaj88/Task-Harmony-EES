@@ -12,12 +12,14 @@
 Build an LLM-powered email extraction system for freight forwarding pricing enquiries.
 
 **What you'll do:**
+
 1. Process 50 sample emails using an LLM
 2. Extract structured shipment details
 3. Measure accuracy against provided ground truth
 4. Document your iteration process
 
 **What we'll evaluate:**
+
 - Your extraction accuracy on provided emails
 - Your code quality and approach
 - **Your solution on 171 hidden test emails** (not provided)
@@ -34,6 +36,7 @@ Body: Dear Sir, Please quote LCL rate from Hong Kong to Chennai, 5 CBM, FOB term
 ```
 
 Your system should extract:
+
 ```json
 {
   "product_line": "pl_sea_import_lcl",
@@ -50,14 +53,14 @@ Your system should extract:
 
 ### Core Rules
 
-| Rule | Logic |
-|------|-------|
-| **Product Line** | Destination is India → `pl_sea_import_lcl`; Origin is India → `pl_sea_export_lcl` (all emails in this assessment are LCL shipments) |
-| **India Detection** | Indian ports have UN/LOCODE starting with `IN` (e.g., INMAA, INNSA, INBLR) |
-| **Incoterm Default** | If not mentioned → `FOB` |
-| **Null Handling** | Missing values → `null` (not `0` or `""`) |
-| **Port Codes** | UN/LOCODE format (5 letters: 2-letter country + 3-letter location) |
-| **Port Names** | Always use the canonical name from `port_codes_reference.json` for the matched code, regardless of how the port was named in the email. If code is `null`, name is also `null` |
+| Rule                 | Logic                                                                                                                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Product Line**     | Destination is India → `pl_sea_import_lcl`; Origin is India → `pl_sea_export_lcl` (all emails in this assessment are LCL shipments)                                            |
+| **India Detection**  | Indian ports have UN/LOCODE starting with `IN` (e.g., INMAA, INNSA, INBLR)                                                                                                     |
+| **Incoterm Default** | If not mentioned → `FOB`                                                                                                                                                       |
+| **Null Handling**    | Missing values → `null` (not `0` or `""`)                                                                                                                                      |
+| **Port Codes**       | UN/LOCODE format (5 letters: 2-letter country + 3-letter location)                                                                                                             |
+| **Port Names**       | Always use the canonical name from `port_codes_reference.json` for the matched code, regardless of how the port was named in the email. If code is `null`, name is also `null` |
 
 ### Valid Incoterms
 
@@ -67,21 +70,22 @@ If incoterm is unrecognizable or ambiguous (e.g., email says "FOB or CIF terms")
 
 ### Dangerous Goods Detection
 
-| Condition | Result |
-|-----------|--------|
-| Contains: "DG", "dangerous", "hazardous", "Class" + number (e.g., Class 3, Class 9), "IMO", "IMDG" | `is_dangerous: true` |
+| Condition                                                                                                | Result                |
+| -------------------------------------------------------------------------------------------------------- | --------------------- |
+| Contains: "DG", "dangerous", "hazardous", "Class" + number (e.g., Class 3, Class 9), "IMO", "IMDG"       | `is_dangerous: true`  |
 | Contains negations: "non-hazardous", "non-DG", "not dangerous", "non hazardous" (with or without hyphen) | `is_dangerous: false` |
-| No mention | `is_dangerous: false` |
+| No mention                                                                                               | `is_dangerous: false` |
 
 ### Conflict Resolution
 
-| Scenario | Rule |
-|----------|------|
-| **Subject vs Body conflict** | Body takes precedence (more detailed context) |
-| **Multiple shipments in one email** | Extract the shipment that appears first in the email body |
-| **Multiple ports mentioned** | Use origin→destination pair, not intermediate/transshipment ports |
+| Scenario                            | Rule                                                              |
+| ----------------------------------- | ----------------------------------------------------------------- |
+| **Subject vs Body conflict**        | Body takes precedence (more detailed context)                     |
+| **Multiple shipments in one email** | Extract the shipment that appears first in the email body         |
+| **Multiple ports mentioned**        | Use origin→destination pair, not intermediate/transshipment ports |
 
 **Example - Subject vs Body conflict:**
+
 ```
 Subject: RATE REQ // FOB // HK TO MUMBAI
 Body: Please quote CIF terms for shipment from Hong Kong to Chennai
@@ -89,6 +93,7 @@ Expected: incoterm="CIF", destination_port_code="INMAA" (body wins)
 ```
 
 **Example - Multiple shipments:**
+
 ```
 Body: "Please quote for two shipments: 1) Hong Kong to Chennai, 500kg and 2) Shanghai to Mumbai, 300kg"
 Expected: origin_port_code="HKHKG", destination_port_code="INMAA", cargo_weight_kg=500.0 (first shipment only)
@@ -96,23 +101,24 @@ Expected: origin_port_code="HKHKG", destination_port_code="INMAA", cargo_weight_
 
 ### Numeric Fields
 
-| Rule | Details |
-|------|---------|
-| **Rounding** | Round `cargo_weight_kg` and `cargo_cbm` to 2 decimal places |
-| **Validation** | Weight and CBM must be positive numbers or `null` |
-| **TBD/N/A values** | "TBD", "N/A", "to be confirmed" → extract as `null` |
-| **Zero values** | Explicit zero (e.g., "0 kg") → extract as `0`, not `null` |
+| Rule               | Details                                                     |
+| ------------------ | ----------------------------------------------------------- |
+| **Rounding**       | Round `cargo_weight_kg` and `cargo_cbm` to 2 decimal places |
+| **Validation**     | Weight and CBM must be positive numbers or `null`           |
+| **TBD/N/A values** | "TBD", "N/A", "to be confirmed" → extract as `null`         |
+| **Zero values**    | Explicit zero (e.g., "0 kg") → extract as `0`, not `null`   |
 
 ### Unit Handling
 
-| Unit | Conversion |
-|------|------------|
-| Weight in lbs | Convert to kg: `lbs × 0.453592`, round to 2 decimals |
-| Weight in tonnes/MT | Convert to kg: `tonnes × 1000` |
-| Dimensions (L×W×H) | Extract as `null` for CBM (do not calculate) |
-| Weight AND CBM both mentioned | Extract both values independently |
+| Unit                          | Conversion                                           |
+| ----------------------------- | ---------------------------------------------------- |
+| Weight in lbs                 | Convert to kg: `lbs × 0.453592`, round to 2 decimals |
+| Weight in tonnes/MT           | Convert to kg: `tonnes × 1000`                       |
+| Dimensions (L×W×H)            | Extract as `null` for CBM (do not calculate)         |
+| Weight AND CBM both mentioned | Extract both values independently                    |
 
 **Example - Both weight and CBM:**
+
 ```
 Email: "...shipment of 500 kg, 2.5 CBM..."
 Expected: cargo_weight_kg=500.0, cargo_cbm=2.5
@@ -126,9 +132,9 @@ The `port_codes_reference.json` file has this structure:
 
 ```json
 [
-  {"code": "HKHKG", "name": "Hong Kong"},
-  {"code": "INMAA", "name": "Chennai"},
-  {"code": "CNSHA", "name": "Shanghai"}
+  { "code": "HKHKG", "name": "Hong Kong" },
+  { "code": "INMAA", "name": "Chennai" },
+  { "code": "CNSHA", "name": "Shanghai" }
 ]
 ```
 
@@ -136,6 +142,7 @@ The `port_codes_reference.json` file has this structure:
 - **name**: Port name (may include variations like "Chennai ICD", "ICD Bangalore")
 
 **Notes:**
+
 - Some ports have multiple name entries mapping to the same code
 - Common abbreviations (e.g., "HK" for Hong Kong) should be handled
 - Exact matching strategy is up to you - document your approach in your README
@@ -166,6 +173,7 @@ The `port_codes_reference.json` file has this structure:
 ## LLM API
 
 Use **Groq** (free, no credit card):
+
 - Sign up: https://console.groq.com
 - Model: `llama-3.1-70b-versatile` (or `llama-3.3-70b-versatile` if unavailable)
 - **Important:** Set `temperature=0` for reproducible results
@@ -187,11 +195,11 @@ response = client.chat.completions.create(
 
 ## Files Provided
 
-| File | Description |
-|------|-------------|
-| `emails_input.json` | 50 sample emails (array of `{id, subject, body}`) |
-| `ground_truth.json` | Expected outputs for accuracy measurement |
-| `port_codes_reference.json` | UN/LOCODE mappings (47 ports) |
+| File                        | Description                                       |
+| --------------------------- | ------------------------------------------------- |
+| `emails_input.json`         | 50 sample emails (array of `{id, subject, body}`) |
+| `ground_truth.json`         | Expected outputs for accuracy measurement         |
+| `port_codes_reference.json` | UN/LOCODE mappings (47 ports)                     |
 
 **Important:** The hidden test set uses the same `port_codes_reference.json` and follows similar patterns to the sample data. No new incoterms, product lines, or port codes beyond the reference file will appear.
 
@@ -218,6 +226,7 @@ your-repo/
 ## README Requirements
 
 ### 1. Setup Instructions
+
 ```bash
 pip install -r requirements.txt
 python extract.py      # Generates output.json
@@ -232,16 +241,19 @@ Show your actual iteration process with **specific examples**:
 ## Prompt Evolution
 
 ### v1: Basic extraction
+
 - Accuracy: 62%
 - Issues: Port codes wrong, missing incoterms
 - Example: EMAIL_007 extracted "Chennai" instead of "INMAA"
 
 ### v2: Added UN/LOCODE examples
+
 - Accuracy: 78%
 - Issues: India detection failing for some ports
 - Example: EMAIL_023 incorrectly set product_line for Nhava Sheva
 
 ### v3: Added business rules explicitly
+
 - Accuracy: 88%
 - Remaining issues: [describe with specific email IDs]
 ```
@@ -251,6 +263,7 @@ Show your actual iteration process with **specific examples**:
 ### 3. Accuracy Metrics
 
 Report these metrics from `evaluate.py`:
+
 - `product_line` accuracy
 - `origin_port_code` accuracy
 - `destination_port_code` accuracy
@@ -263,6 +276,7 @@ Report these metrics from `evaluate.py`:
 ### 4. Edge Cases Handled
 
 Document at least 3 specific edge cases you encountered:
+
 - Which email IDs had the issue?
 - What was the problem?
 - How did you solve it?
@@ -281,18 +295,19 @@ Answer each in 2-3 paragraphs:
 
 ## Evaluation Criteria
 
-| Criteria | Weight | What We Look For |
-|----------|--------|------------------|
-| **Accuracy** | 40% | Performance on provided + hidden test set |
-| **Code Quality** | 30% | Clean code, type hints, Pydantic, error handling, graceful API timeout handling |
-| **LLMOps Practices** | 20% | Prompt versioning, iteration evidence with specific examples, validation |
-| **Documentation** | 10% | Clear reasoning, trade-offs explained |
+| Criteria             | Weight | What We Look For                                                                |
+| -------------------- | ------ | ------------------------------------------------------------------------------- |
+| **Accuracy**         | 40%    | Performance on provided + hidden test set                                       |
+| **Code Quality**     | 30%    | Clean code, type hints, Pydantic, error handling, graceful API timeout handling |
+| **LLMOps Practices** | 20%    | Prompt versioning, iteration evidence with specific examples, validation        |
+| **Documentation**    | 10%    | Clear reasoning, trade-offs explained                                           |
 
 ### Accuracy Calculation
 
 **Overall accuracy** = (total correct field values) / (total field values)
 
 **Evaluated fields (9 per email):**
+
 1. `product_line`
 2. `origin_port_code`
 3. `origin_port_name`
@@ -306,18 +321,19 @@ Answer each in 2-3 paragraphs:
 The `id` field is not evaluated (it's just an identifier).
 
 **Comparison rules for evaluate.py:**
+
 - String comparisons: case-insensitive, whitespace trimmed
 - Float comparisons: exact match after rounding to 2 decimal places
 - Null comparisons: `null` only equals `null`
 
 ### Accuracy Expectations
 
-| Score | Rating |
-|-------|--------|
-| 90%+ | Exceptional |
-| 80-89% | Strong |
-| 70-79% | Acceptable |
-| <70% | Needs improvement |
+| Score  | Rating            |
+| ------ | ----------------- |
+| 90%+   | Exceptional       |
+| 80-89% | Strong            |
+| 70-79% | Acceptable        |
+| <70%   | Needs improvement |
 
 ---
 
@@ -331,6 +347,7 @@ The `id` field is not evaluated (it's just an identifier).
 ### Follow-up Call Details
 
 The call will include:
+
 - Walk through your prompt iteration process (be ready to explain why each change was made)
 - Explain a specific decision you made and trade-offs considered
 - **Live modification:** Add a new extraction field or handle a new edge case we provide (to verify you wrote and understand the code)
