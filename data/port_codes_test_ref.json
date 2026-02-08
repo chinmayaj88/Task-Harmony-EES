@@ -1,0 +1,118 @@
+[
+  {
+    "code": "INMAA",
+    "name": "Chennai",
+    "aliases": [
+      "Chennai",
+      "Madras",
+      "MAA",
+      "Cheenai",
+      "Chennai Port"
+    ]
+  },
+  {
+    "code": "CNSHA",
+    "name": "Shanghai",
+    "aliases": [
+      "Shanghai",
+      "SHA",
+      "Shangai",
+      "Shengai"
+    ]
+  },
+  {
+    "code": "SGSIN",
+    "name": "Singapore",
+    "aliases": [
+      "Singapore",
+      "SIN",
+      "Singapor",
+      "S'pore"
+    ]
+  },
+  {
+    "code": "AEJEA",
+    "name": "Jebel Ali",
+    "aliases": [
+      "Jebel Ali",
+      "JEA",
+      "Jebel Ali Port",
+      "Dubai (Jebel Ali)"
+    ]
+  },
+  {
+    "code": "KRPUS",
+    "name": "Busan",
+    "aliases": [
+      "Busan",
+      "Pusan",
+      "BUS",
+      "PUS"
+    ]
+  },
+  {
+    "code": "DEHAM",
+    "name": "Hamburg",
+    "aliases": [
+      "Hamburg",
+      "HAM",
+      "Hamburgh"
+    ]
+  },
+  {
+    "code": "USLAX",
+    "name": "Los Angeles",
+    "aliases": [
+      "Los Angeles",
+      "LAX",
+      "L.A.",
+      "Los Angles"
+    ]
+  },
+  {
+    "code": "INBLR",
+    "name": "Bangalore",
+    "aliases": [
+      "Bangalore",
+      "BLR",
+      "Bengaluru",
+      "ICD Bangalore"
+    ]
+  },
+  {
+    "code": "INNSA",
+    "name": "Nhava Sheva",
+    "aliases": [
+      "Nhava Sheva",
+      "NSA",
+      "Nava Sheva",
+      "Mumbai (Nhava Sheva)"
+    ]
+  },
+  {
+    "code": "MYPKG",
+    "name": "Port Klang",
+    "aliases": [
+      "Port Klang",
+      "PKG",
+      "Port Kelang"
+    ]
+  },
+  {
+    "code": "CNNSA",
+    "name": "Nansha",
+    "aliases": [
+      "Nansha",
+      "NSA (China)"
+    ]
+  },
+  {
+    "code": "TWKEL",
+    "name": "Keelung",
+    "aliases": [
+      "Keelung",
+      "KEL",
+      "Keelung TW"
+    ]
+  }
+]

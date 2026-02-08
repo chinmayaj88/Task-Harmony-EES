@@ -1,0 +1,402 @@
+[
+  {
+    "id": "TEST_EMAIL_001",
+    "subject": "Enquiry: Keelung to Nansha",
+    "body": "Dear Team,\n\nPlease quote for Chemicals.\nOrigin: Keelung\nDest: Nansha\nWeight: 748.09 kgs\nVolume: 1.45 cbm\nIncoterm: FOB\nDG: No\n\nRegards,\nClient",
+    "sender_email": "user1@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_002",
+    "subject": "Enquiry: Madras to Dubai (Jebel Ali)",
+    "body": "Dear Team,\n\nPlease quote for Electronics.\nOrigin: Madras\nDest: Dubai (Jebel Ali)\nWeight: 4010.05 kgs\nVolume: 4.83 cbm\nIncoterm: EXW\nDG: No\n\nRegards,\nClient",
+    "sender_email": "user2@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_003",
+    "subject": "Re: Fwd: Shipment Enquiry Toys",
+    "body": "Dear Sir/Madam,\n\nHope this email finds you well.\n\nWe have a new requirement. Please see below details and provide your best ocean freight charges locally and destination wise.\n\nPOL: Los Angles\nPOD: NSA (China)\nItem: Toys\nGross Weight: 3110.75 KG\nMeasurement: 13.65 CBM\nTerms of Shipment: FOB\nDangerous Goods: NO\n\nLooking forward to your swift reply.\n\n\n\nVIRUS FREE SCANNED BY AVAST.\n\n\nBuy crypto now!!",
+    "sender_email": "user3@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_004",
+    "subject": "Re: Fwd: Shipment Enquiry Garments",
+    "body": "Dear Sir/Madam,\n\nHope this email finds you well.\n\nWe have a new requirement. Please see below details and provide your best ocean freight charges locally and destination wise.\n\nPOL: Cheenai\nPOD: BLR\nItem: Garments\nGross Weight: 3820.35 KG\nMeasurement: 9.28 CBM\nTerms of Shipment: FOB\nDangerous Goods: NO\n\nLooking forward to your swift reply.\n\n\n\nVIRUS FREE SCANNED BY AVAST.\n\n\nSent from my iPhone",
+    "sender_email": "user4@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_005",
+    "subject": "Enquiry: SIN to Port Kelang",
+    "body": "Dear Team,\n\nPlease quote for Textiles.\nOrigin: SIN\nDest: Port Kelang\nWeight: 859.95 kgs\nVolume: 1.26 cbm\nIncoterm: CIF\nDG: Yes\n\nRegards,\nClient",
+    "sender_email": "user5@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_006",
+    "subject": "Re: Fwd: Shipment Enquiry Auto Parts",
+    "body": "Dear Sir/Madam,\n\nHope this email finds you well.\n\nWe have a new requirement. Please see below details and provide your best ocean freight charges locally and destination wise.\n\nPOL: Nansha\nPOD: Bangalore\nItem: Auto Parts\nGross Weight: 286.45 KG\nMeasurement: 0.32 CBM\nTerms of Shipment: DDP\nDangerous Goods: NO\n\nLooking forward to your swift reply.\n\n\n\nSent from my iPhone\n\n\nGet 50% off on your next shipment! Visit our site.",
+    "sender_email": "user6@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_007",
+    "subject": "Enquiry: Bangalore to Madras",
+    "body": "Dear Team,\n\nPlease quote for Chemicals.\nOrigin: Bangalore\nDest: Madras\nWeight: 2565.72 kgs\nVolume: 3.73 cbm\nIncoterm: FOB\nDG: No\n\nRegards,\nClient",
+    "sender_email": "user7@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_008",
+    "subject": "Enquiry: Bengaluru to SHA",
+    "body": "Dear Team,\n\nPlease quote for Furniture.\nOrigin: Bengaluru\nDest: SHA\nWeight: 2067.06 kgs\nVolume: 2.97 cbm\nIncoterm: DDP\nDG: No\n\nRegards,\nClient",
+    "sender_email": "user8@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_009",
+    "subject": "Re: Fwd: Shipment Enquiry Steel Pipes",
+    "body": "Dear Sir/Madam,\n\nHope this email finds you well.\n\nWe have a new requirement. Please see below details and provide your best ocean freight charges locally and destination wise.\n\nPOL: MAA\nPOD: NSA (China)\nItem: Steel Pipes\nGross Weight: 360.37 KG\nMeasurement: 0.99 CBM\nTerms of Shipment: DDP\nDangerous Goods: YES (Class 3)\n\nLooking forward to your swift reply.\n\n\n\nAUTO-REPLY: I am out of office.\n\n\nAUTO-REPLY: I am out of office.",
+    "sender_email": "user9@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_010",
+    "subject": "Re: Fwd: Shipment Enquiry Toys",
+    "body": "Dear Sir/Madam,\n\nHope this email finds you well.\n\nWe have a new requirement. Please see below details and provide your best ocean freight charges locally and destination wise.\n\nPOL: Jebel Ali\nPOD: S'pore\nItem: Toys\nGross Weight: 3951.95 KG\nMeasurement: 15.97 CBM\nTerms of Shipment: DDP\nDangerous Goods: NO\n\nLooking forward to your swift reply.\n\n\n\nBuy crypto now!!\n\n\nAUTO-REPLY: I am out of office.",
+    "sender_email": "user10@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_011",
+    "subject": "Nansha-NSA rate",
+    "body": "3.26bcm, 2934.79kg. Nansha to NSA. FOB. .",
+    "sender_email": "user11@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_012",
+    "subject": "BLR-Chennai rate",
+    "body": "6.34cbm, 2957.02kg. BLR to Chennai. DDP. .",
+    "sender_email": "user12@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_013",
+    "subject": "Enquiry: Dubai (Jebel Ali) to Cheenai",
+    "body": "Dear Team,\n\nPlease quote for Electronics.\nOrigin: Dubai (Jebel Ali)\nDest: Cheenai\nWeight: 1012.81 kgs\nVolume: 2.32 cbm\nIncoterm: FOB\nDG: No\n\nRegards,\nClient",
+    "sender_email": "user13@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_014",
+    "subject": "Hamburg-PUS rate",
+    "body": "2.95cbm, 1805.18kg. Hamburg to PUS. DDP. .",
+    "sender_email": "user14@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_015",
+    "subject": "Hamburg-PKG rate",
+    "body": "9.12cbm, 3208.0kg. Hamburg to PKG. EXW. .",
+    "sender_email": "user15@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_016",
+    "subject": "Enquiry: Singapore to Jebel Ali",
+    "body": "Dear Team,\n\nPlease quote for Steel Pipes.\nOrigin: Singapore\nDest: Jebel Ali\nWeight: 2202.92 kgs\nVolume: 4.24 cbm\nIncoterm: CIF\nDG: No\n\nRegards,\nClient",
+    "sender_email": "user16@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_017",
+    "subject": "URGENT!!!! shipment BUS -> Nhava Sheva",
+    "body": "Hi,\n\nhope you are doing well good morning.\nWe hv shipment form BUS to Nava Sheva.\nPls give rates.\n\nDetails:\nComm: Toys\nWgt: 805kgs (approx)\nVol: 1.01 m3\nTerm: FCA\n\nNon-haz cargo.\n\nThx.",
+    "sender_email": "user17@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_018",
+    "subject": "URGENT!!!! shipment S'pore -> Hamburg",
+    "body": "Hi,\n\npls revert back asap.\nWe hv shipment form S'proe to Hamburg.\nPls give rates.\n\nDetails:\nComm: Furniture\nWght: 4533kgs (approx)\nVol: 9.47 m3\nTerm: FCA\n\nNeed DG rates!!\n\nThx.",
+    "sender_email": "user18@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_019",
+    "subject": "URGENT!!!! shipment Jebel Ali Port -> Madras",
+    "body": "Hi,\n\ngiving best rats pls.\nWe hv shipment form Jebel Ali Port to Madras.\nPls give rates.\n\nDetails:\nComm: Steel Pipes\nWght: 490kgs (approx)\nVol: 0.93 m3\nTerm: DAP\n\nNon-haz cargo.\n\nThx.",
+    "sender_email": "user19@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_020",
+    "subject": "Enquiry: PKG to Nansha",
+    "body": "Dear Team,\n\nPlease quote for Chemicals.\nOrigin: PKG\nDest: Nansha\nWeight: 1020.37 kgs\nVolume: 1.77 cbm\nIncoterm: DAP\nDG: No\n\nRegards,\nClient",
+    "sender_email": "user20@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_021",
+    "subject": "Re: Fwd: Shipment Enquiry Garments",
+    "body": "Dear Sir/Madam,\n\nHope this email finds you well.\n\nWe have a new requirement. Please see below details and provide your best ocean freight charges locally and destination wise.\n\nPOL: NSA (China)\nPOD: Singapor\nItem: Garments\nGross Weight: 3185.71 KG\nMeasurement: 3.32 CBM\nTerms of Shipment: FOB\nDangerous Goods: NO\n\nLooking forward to your swift reply.\n\n\n\nBuy crypto now!!\n\n\nBuy crypto now!!",
+    "sender_email": "user21@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_022",
+    "subject": "Enquiry: BLR to Shengai",
+    "body": "Dear Team,\n\nPlease quote for Toys.\nOrigin: BLR\nDest: Shengai\nWeight: 1249.01 kgs\nVolume: 1.37 cbm\nIncoterm: DDP\nDG: No\n\nRegards,\nClient",
+    "sender_email": "user22@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_023",
+    "subject": "Enquiry: Jebel Ali Port to LAX",
+    "body": "Dear Team,\n\nPlease quote for Chemicals.\nOrigin: Jebel Ali Port\nDest: LAX\nWeight: 597.71 kgs\nVolume: 1.46 cbm\nIncoterm: CIF\nDG: No\n\nRegards,\nClient",
+    "sender_email": "user23@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_024",
+    "subject": "URGENT!!!! shipment Shengai -> Nansha",
+    "body": "Hi,\n\nregarding the subject matter.\nWe hv shipment form Shenagi to Nansha.\nPls give rates.\n\nDetails:\nComm: Chemicals\nWght: 4942kgs (approx)\nVol: 6.24 m3\nTerm: FCA\n\nNon-haz cargo.\n\nThx.",
+    "sender_email": "user24@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_025",
+    "subject": "KEL-HAM rate",
+    "body": "6.48cbm, 4237.21kg. KEL to HAM. EXW. .",
+    "sender_email": "user25@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_026",
+    "subject": "URGENT!!!! shipment Jebel Ali -> Port Kelang",
+    "body": "Hi,\n\nurgent shippment request.\nWe hv shipment form Jebel Ali to Port Kelnag.\nPls give rates.\n\nDetails:\nComm: Plastic Goods\nWght: 1709kgs (approx)\nVol: 2.85 m3\nTerm: DDP\n\nNon-haz cargo.\n\nThx.",
+    "sender_email": "user26@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_027",
+    "subject": "Re: Fwd: Shipment Enquiry Toys",
+    "body": "Dear Sir/Madam,\n\nHope this email finds you well.\n\nWe have a new requirement. Please see below details and provide your best ocean freight charges locally and destination wise.\n\nPOL: Mumbai (Nhava Sheva)\nPOD: KEL\nItem: Toys\nGross Weight: 2390.89 KG\nMeasurement: 4.12 CBM\nTerms of Shipment: FCA\nDangerous Goods: NO\n\nLooking forward to your swift reply.\n\n\n\nCONFIDENTIALITY NOTICE: The contents of this email message and any attachments are intended solely for the addressee(s) and may contain confidential and/or privileged information and may be legally protected from disclosure.\n\n\nPlease consider the environment before printing this email.",
+    "sender_email": "user27@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_028",
+    "subject": "Enquiry: Nansha to NSA",
+    "body": "Dear Team,\n\nPlease quote for Machinery.\nOrigin: Nansha\nDest: NSA\nWeight: 895.63 kgs\nVolume: 0.99 cbm\nIncoterm: EXW\nDG: No\n\nRegards,\nClient",
+    "sender_email": "user28@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_029",
+    "subject": "Re: Fwd: Shipment Enquiry Textiles",
+    "body": "Dear Sir/Madam,\n\nHope this email finds you well.\n\nWe have a new requirement. Please see below details and provide your best ocean freight charges locally and destination wise.\n\nPOL: NSA (China)\nPOD: PKG\nItem: Textiles\nGross Weight: 831.63 KG\nMeasurement: 2.85 CBM\nTerms of Shipment: CIF\nDangerous Goods: YES (Class 3)\n\nLooking forward to your swift reply.\n\n\n\nGet 50% off on your next shipment! Visit our site.\n\n\nVIRUS FREE SCANNED BY AVAST.",
+    "sender_email": "user29@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_030",
+    "subject": "Re: Fwd: Shipment Enquiry Textiles",
+    "body": "Dear Sir/Madam,\n\nHope this email finds you well.\n\nWe have a new requirement. Please see below details and provide your best ocean freight charges locally and destination wise.\n\nPOL: Busan\nPOD: NSA\nItem: Textiles\nGross Weight: 3582.96 KG\nMeasurement: 9.68 CBM\nTerms of Shipment: DAP\nDangerous Goods: NO\n\nLooking forward to your swift reply.\n\n\n\nCONFIDENTIALITY NOTICE: The contents of this email message and any attachments are intended solely for the addressee(s) and may contain confidential and/or privileged information and may be legally protected from disclosure.\n\n\nAUTO-REPLY: I am out of office.",
+    "sender_email": "user30@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_031",
+    "subject": "Enquiry: KEL to Port Kelang",
+    "body": "Dear Team,\n\nPlease quote for Toys.\nOrigin: KEL\nDest: Port Kelang\nWeight: 4703.09 kgs\nVolume: 11.27 cbm\nIncoterm: DDP\nDG: Yes\n\nRegards,\nClient",
+    "sender_email": "user31@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_032",
+    "subject": "JEA-NSA (China) rate",
+    "body": "2.9cbm, 974.72kg. JEA to NSA (China). FOB. .",
+    "sender_email": "user32@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_033",
+    "subject": "URGENT!!!! shipment Singapor -> Bangalore",
+    "body": "Hi,\n\nhope you are doing well good morning.\nWe hv shipment form Singapor to Bangaloer.\nPls give rates.\n\nDetails:\nComm: Electronics\nWght: 4653kgs (approx)\nVol: 17.44 m3\nTerm: EXW\n\nNon-haz cargo.\n\nThx.",
+    "sender_email": "user33@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_034",
+    "subject": "Re: Fwd: Shipment Enquiry Plastic Goods",
+    "body": "Dear Sir/Madam,\n\nHope this email finds you well.\n\nWe have a new requirement. Please see below details and provide your best ocean freight charges locally and destination wise.\n\nPOL: Shanghai\nPOD: Madras\nItem: Plastic Goods\nGross Weight: 2531.27 KG\nMeasurement: 4.71 CBM\nTerms of Shipment: CIF\nDangerous Goods: NO\n\nLooking forward to your swift reply.\n\n\n\nSent from my iPhone\n\n\nGet 50% off on your next shipment! Visit our site.",
+    "sender_email": "user34@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_035",
+    "subject": "Enquiry: Shengai to Nhava Sheva",
+    "body": "Dear Team,\n\nPlease quote for Steel Pipes.\nOrigin: Shengai\nDest: Nhava Sheva\nWeight: 364.67 kgs\nVolume: 0.47 cbm\nIncoterm: CIF\nDG: Yes\n\nRegards,\nClient",
+    "sender_email": "user35@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_036",
+    "subject": "Enquiry: Shanghai to NSA (China)",
+    "body": "Dear Team,\n\nPlease quote for Auto Parts.\nOrigin: Shanghai\nDest: NSA (China)\nWeight: 1801.61 kgs\nVolume: 3.8 cbm\nIncoterm: FCA\nDG: No\n\nRegards,\nClient",
+    "sender_email": "user36@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_037",
+    "subject": "URGENT!!!! shipment NSA (China) -> Bangalore",
+    "body": "Hi,\n\nurgent shippment request.\nWe hv shipment form NSA (China) to Bngalore.\nPls give rates.\n\nDetails:\nComm: Auto Parts\nWght: 3173kgs (approx)\nVol: 3.55 m3\nTerm: DDP\n\nNon-haz cargo.\n\nThx.",
+    "sender_email": "user37@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_038",
+    "subject": "URGENT!!!! shipment Nansha -> Keelung",
+    "body": "Hi,\n\nwe are wanting to ship.\nWe hv shipment form Nansha to Keelng.\nPls give rates.\n\nDetails:\nComm: Auto Parts\nWght: 4286kgs (approx)\nVol: 12.32 m3\nTerm: FCA\n\nNon-haz cargo.\n\nThx.",
+    "sender_email": "user38@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_039",
+    "subject": "URGENT!!!! shipment ICD Bangalore -> Pusan",
+    "body": "Hi,\n\nwe are wanting to ship.\nWe hv shipment form ICD Bangalore to Pusan.\nPls give rates.\n\nDetails:\nCom:m Electronics\nWght: 4234kgs (approx)\nVol: 7.46 m3\nTerm: DAP\n\nNeed DG rates!!\n\nThx.",
+    "sender_email": "user39@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_040",
+    "subject": "URGENT!!!! shipment Pusan -> LAX",
+    "body": "Hi,\n\npls revert back asap.\nWe hv shipment form Pusan to LAX.\nPls give rates.\n\nDetails:\nComm: Chemicals\nWght: 766kgs (approx)\nVol: 3.25 m3\nTerm: DAP\n\nNon-haz cargo.\n\nThx.",
+    "sender_email": "user40@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_041",
+    "subject": "Enquiry: NSA (China) to Shanghai",
+    "body": "Dear Team,\n\nPlease quote for Chemicals.\nOrigin: NSA (China)\nDest: Shanghai\nWeight: 538.1 kgs\nVolume: 0.58 cbm\nIncoterm: FCA\nDG: Yes\n\nRegards,\nClient",
+    "sender_email": "user41@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_042",
+    "subject": "Enquiry: Hamburgh to KEL",
+    "body": "Dear Team,\n\nPlease quote for Furniture.\nOrigin: Hamburgh\nDest: KEL\nWeight: 3077.78 kgs\nVolume: 4.32 cbm\nIncoterm: EXW\nDG: No\n\nRegards,\nClient",
+    "sender_email": "user42@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_043",
+    "subject": "Re: Fwd: Shipment Enquiry Furniture",
+    "body": "Dear Sir/Madam,\n\nHope this email finds you well.\n\nWe have a new requirement. Please see below details and provide your best ocean freight charges locally and destination wise.\n\nPOL: Shengai\nPOD: Hamburgh\nItem: Furniture\nGross Weight: 2891.09 KG\nMeasurement: 7.7 CBM\nTerms of Shipment: DDP\nDangerous Goods: NO\n\nLooking forward to your swift reply.\n\n\n\nAUTO-REPLY: I am out of office.\n\n\nAUTO-REPLY: I am out of office.",
+    "sender_email": "user43@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_044",
+    "subject": "Shengai-Chennai Port rate",
+    "body": "1.13cbm, 1103.17kg. Shengai to Chennai Port. FCA. .",
+    "sender_email": "user44@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_045",
+    "subject": "URGENT!!!! shipment LAX -> Port Kelang",
+    "body": "Hi,\n\npls revert back asap.\nWe hv shipment form LAX to Potr Kelang.\nPls give rates.\n\nDetails:\nComm: Chemicals\nWght: 2328kgs (approx)\nVol: 8.75 m3\nTerm: FCA\n\nNeed DG rates!!\n\nThx.",
+    "sender_email": "user45@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_046",
+    "subject": "Enquiry: Port Kelang to Hamburg",
+    "body": "Dear Team,\n\nPlease quote for Steel Pipes.\nOrigin: Port Kelang\nDest: Hamburg\nWeight: 3025.89 kgs\nVolume: 4.73 cbm\nIncoterm: FCA\nDG: No\n\nRegards,\nClient",
+    "sender_email": "user46@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_047",
+    "subject": "Jebel Ali-Nava Sheva rate",
+    "body": "7.25cbm, 3921.52kg. Jebel Ali to Nava Sheva. DDP. .",
+    "sender_email": "user47@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_048",
+    "subject": "Re: Fwd: Shipment Enquiry Machinery",
+    "body": "Dear Sir/Madam,\n\nHope this email finds you well.\n\nWe have a new requirement. Please see below details and provide your best ocean freight charges locally and destination wise.\n\nPOL: Chennai Port\nPOD: Pusan\nItem: Machinery\nGross Weight: 560.74 KG\nMeasurement: 1.29 CBM\nTerms of Shipment: DDP\nDangerous Goods: YES (Class 3)\n\nLooking forward to your swift reply.\n\n\n\nAUTO-REPLY: I am out of office.\n\n\nPlease consider the environment before printing this email.",
+    "sender_email": "user48@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_049",
+    "subject": "URGENT!!!! shipment Cheenai -> Nansha",
+    "body": "Hi,\n\npls revert back asap.\nWe hv shipment form Cheenai to Nansha.\nPls give rates.\n\nDetails:\nComm: Electronics\nWght: 2251kgs (approx)\nVol: 2.62 m3\nTerm: FOB\n\nNon-haz cargo.\n\nThx.",
+    "sender_email": "user49@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  },
+  {
+    "id": "TEST_EMAIL_050",
+    "subject": "Enquiry: JEA to Nava Sheva",
+    "body": "Dear Team,\n\nPlease quote for Machinery.\nOrigin: JEA\nDest: Nava Sheva\nWeight: 1734.48 kgs\nVolume: 2.22 cbm\nIncoterm: CIF\nDG: No\n\nRegards,\nClient",
+    "sender_email": "user50@example.com",
+    "to_emails": "sales@logistics.com",
+    "cc_emails": ""
+  }
+]

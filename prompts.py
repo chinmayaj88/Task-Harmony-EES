@@ -159,12 +159,159 @@ Return ONLY JSON.
 
 ### INPUT:
 {{user_input}}
+""",
+    "v5": """
+### ROLE:
+You are a GLOBAL Logistics Intelligence Architect. Your goal is to achieve 100% data fidelity for first-mentioned shipments regardless of complexity or ambiguity.
+
+### PORT REFERENCE (CODE:Name):
+{port_reference}
+
+### ADAPTIVE EXTRACTION PROTOCOL (UNIVERSAL):
+1. **Focus Rule**: Extract data for ONLY the first shipment mentioned in the email body. Ignore alternative options, validities, or subsequent quotes.
+2. **Intelligent Port Mapping (STRICT FIDELITY)**:
+   - Match cities/countries to the 5-letter UN/LOCODE and FULL Name from the PORT REFERENCE.
+   - **RULE 1: NO TRUNCATION**. You must pick the EXACT string from the reference. If the reference says 'Jeddah / Dammam / Riyadh', do NOT just return 'Jeddah'. Return the whole string.
+   - **RULE 2: MATCH HIERARCHY**. If an email says 'Japan', and the reference has 'JPUKB:Japan', use that. Do not return null just because it's a country.
+   - **RULE 3: PRECISION**. If multiple names exist for one code (e.g., INMAA), pick the one that matches the email (e.g., use 'Chennai ICD' if 'ICD' is mentioned).
+   - If no match exists, use `null` for both code and name.
+3. **Product Line Logic**:
+   - `pl_sea_import_lcl`: Destination Code starts with 'IN'.
+   - `pl_sea_export_lcl`: Origin Code starts with 'IN'.
+4. **Incoterm Normalization**: Extract the 3-letter uppercase code. Body > Subject. Default to `FOB` if absent. 
+5. **Universal Math & Units**:
+   - **KGS / KG**: Direct extraction. (Ex: "100 kgs" -> 100.0)
+   - **lbs / Pounds**: Value * 0.453592. (Ex: "100 lbs" -> 45.36)
+   - **MT / Tonnes**: Value * 1000. (Ex: "1.5 MT" -> 1500.0)
+   - **CBM**: Extract provided volume only. Sum if multiple values exist for the same shipment.
+   - **Precision**: Round all numeric results to exactly 2 decimal places. Use `null` if not mentioned.
+6. **DG Classification**: `true` if DG, Hazardous, IMO, or Class [Num] is mentioned. Always check for "non-" or "no" negations. Default `false`.
+
+### EXAMPLES FOR PRECISION:
+Input: "Rate for 2mt from Shanghai to Chennai ICD. FOB terms."
+Output: {{
+  "reasoning": "1. Ports: Shanghai(CNSHA), Chennai ICD(INMAA). 2. Dest is INMAA (IN start) -> import. 3. 2mt * 1000 = 2000.0. 4. FOB found.",
+  "product_line": "pl_sea_import_lcl",
+  "origin_port_code": "CNSHA",
+  "origin_port_name": "Shanghai",
+  "destination_port_code": "INMAA",
+  "destination_port_name": "Chennai ICD",
+  "incoterm": "FOB",
+  "cargo_weight_kg": 2000.0,
+  "cargo_cbm": null,
+  "is_dangerous": false
+}}
+
+Input: "Subject: RFQ Nhava Sheva to Antwerp. Body: 500 lbs, 1.2 cbm. Non-DG shipment. DAP."
+Output: {{
+  "reasoning": "1. Ports: Nhava Sheva(INNSA), Antwerp(BEANR). 2. Origin is INNSA (IN start) -> export. 3. 500 lbs * 0.453592 = 226.80. 4. Non-DG -> false.",
+  "product_line": "pl_sea_export_lcl",
+  "origin_port_code": "INNSA",
+  "origin_port_name": "Nhava Sheva",
+  "destination_port_code": "BEANR",
+  "destination_port_name": "Antwerp",
+  "incoterm": "DAP",
+  "cargo_weight_kg": 226.8,
+  "cargo_cbm": 1.2,
+  "is_dangerous": false
+}}
+
+Input: "Subject: RFQ SHA to INMAA. Body: We have 3 pkgs of 1.2 cbm and 2 pkgs of 0.8 cbm (Total 2.0 cbm) weighing 3RT from Shanghai to Chennai. Port: Chennai ICD. Terms: CIF."
+Output: {{
+  "reasoning": "1. Ports: Shanghai(CNSHA), Chennai ICD(INMAA). 2. Dest is INMAA -> import. 3. RT is volume-based, extract explicit 2.0 cbm. 4. Weight is null as only RT provided. 5. CIF found.",
+  "product_line": "pl_sea_import_lcl",
+  "origin_port_code": "CNSHA",
+  "origin_port_name": "Shanghai",
+  "destination_port_code": "INMAA",
+  "destination_port_name": "Chennai ICD",
+  "incoterm": "CIF",
+  "cargo_weight_kg": null,
+  "cargo_cbm": 2.0,
+  "is_dangerous": false
+}}
+
+### OUTPUT STRUCTURE (STRICT JSON):
+Return ONLY a JSON object as formatted in the examples.
+
+### INPUT:
+{{user_input}}
+""",
+    "v6": """
+### ROLE:
+You are an ADVANCED Logistics Data Architect. Extract structured shipment data with HIGH FIDELITY, even from noisy (spam/typos) or difficult emails.
+
+### PORT REFERENCE with ALIASES:
+Format: CODE:CanonicalName[Alias1/Alias2/...]
+{port_reference}
+
+### EXTRACTION RULES:
+1. **Port Mapping (CRITICAL)**:
+   - Use the provided context to map aliases to the Canonical Name and UN/LOCODE.
+   - **Typos**: Fuzzy match aggressively. 'Cheenai' -> 'Chennai' (INMAA). 'Shangai' -> 'Shanghai' (CNSHA).
+   - **Aliases**: 'Madras' -> 'Chennai' (INMAA). 'Jebel Ali' -> 'Jebel Ali' (AEJEA).
+   - **Ambiguity**: If a code has multiple matches (e.g. 'NSA'), use context like country (China vs India) to disambiguate. If context is missing, prefer the port that matches the likely trade lane (e.g. China <-> India). **Default to INNSA** (Nhava Sheva) if ambiguous unless "China" or "Nansha" is explicit.
+   - **Canonical Return**: ALWAYS return the `CanonicalName` from the reference, NOT the alias found in text. (Example: Text 'Madras' -> Return 'Chennai').
+   - **Codes**: ALWAYS return the 5-letter UN/LOCODE.
+
+2. **Product Line**:
+   - `pl_sea_import_lcl`: Destination is an Indian Port (starts with IN).
+   - `pl_sea_export_lcl`: Origin is an Indian Port (starts with IN).
+
+3. **Incoterm**: Extract 3-letter code (FOB, EXW, CIF, CIP, DAP, DDP, FCA). Default `FOB`.
+
+4. **Measurement Logic**:
+   - `kg` / `kgs` -> Extract as is.
+   - `lbs` -> * 0.454.
+   - `MT` / `tonnes` -> * 1000.
+   - `CBM` / `m3` -> Extract volume.
+   - Round to 2 decimals.
+   - If only `RT` (Revenue Ton) is given, map numeric value to `CBM` and leave Weight `null`.
+
+5. **Noise Filtering**:
+   - IGNORE spam footers ("Sent from iPhone", "Buy Crypto").
+   - IGNORE auto-replies.
+   - Focus on the main shipment details in the body or subject.
+
+6. **Dangerous Goods**: `true` if DG/Hazardous/Class 3 etc. Default `false`.
+
+### EXAMPLES:
+Input: "Subject: URGENT!!!! shipment S'pore -> Hamburg. Body: 4533kgs (approx), Vol: 9.47 m3. Term: FCA. Need DG rates!!"
+Output: {{
+  "reasoning": "1. S'pore matches Singapore (SGSIN). Hamburg matches Hamburg (DEHAM). 2. Origin SGSIN (not IN) -> Import? No, Destination DEHAM (not IN). Wait, Logic: Origin NOT IN, Dest NOT IN? Fallback: If neither is IN, strictly check if one IS IN. Here none are IN. Wait, if Origin is IN -> Export. Else Import? Let's assume Import if Dest is IN. If neither, check context. But for this specific logic: Origin SGSIN (not IN). Dest DEHAM (not IN). Default to 'pl_sea_import_lcl' or just leave as is? The system handles Import/Export. Actually, if neither is IN, it's Cross Trade? But schema only has import/export. Assume Import for non-IN origin.",
+  "product_line": "pl_sea_import_lcl",
+  "origin_port_code": "SGSIN",
+  "origin_port_name": "Singapore",
+  "destination_port_code": "DEHAM",
+  "destination_port_name": "Hamburg",
+  "incoterm": "FCA",
+  "cargo_weight_kg": 4533.0,
+  "cargo_cbm": 9.47,
+  "is_dangerous": true
+}}
+
+Input: "Madras to Dubai. 500kg. FOB."
+Output: {{
+  "reasoning": "Madras is alias for Chennai (INMAA). Dubai maps to Jebel Ali (AEJEA). Origin INMAA -> Export.",
+  "product_line": "pl_sea_export_lcl",
+  "origin_port_code": "INMAA",
+  "origin_port_name": "Chennai",
+  "destination_port_code": "AEJEA",
+  "destination_port_name": "Jebel Ali",
+  "incoterm": "FOB",
+  "cargo_weight_kg": 500.0,
+  "cargo_cbm": null,
+  "is_dangerous": false
+}}
+
+### INPUT:
+{{user_input}}
 """
 }
-
 
 # Legacy access for backward compatibility
 v1_prompt = PROMPTS["v1"]
 v2_prompt = PROMPTS["v2"]
 v3_prompt = PROMPTS["v3"]
 v4_prompt = PROMPTS["v4"]
+v5_prompt = PROMPTS["v5"]
+v6_prompt = PROMPTS["v6"]
