@@ -253,18 +253,21 @@ Format: CODE:CanonicalName[Alias1/Alias2/...]
    - **Canonical Return**: ALWAYS return the `CanonicalName` from the reference, NOT the alias found in text. (Example: Text 'Madras' -> Return 'Chennai').
    - **Codes**: ALWAYS return the 5-letter UN/LOCODE.
 
-2. **Product Line**:
-   - `pl_sea_import_lcl`: Destination is an Indian Port (starts with IN).
-   - `pl_sea_export_lcl`: Origin is an Indian Port (starts with IN).
+2. **Product Line (STRICT LOGIC)**:
+   - **Step 1**: Check Destination Port Code. IF it starts with 'IN' (e.g. INMAA, INNSA, INBLR) -> `pl_sea_import_lcl`.
+   - **Step 2**: Check Origin Port Code. IF it starts with 'IN' -> `pl_sea_export_lcl`.
+   - **Step 3**: If NEITHER starts with 'IN', default to `pl_sea_import_lcl`.
 
 3. **Incoterm**: Extract 3-letter code (FOB, EXW, CIF, CIP, DAP, DDP, FCA). Default `FOB`.
 
 4. **Measurement Logic**:
+   - **Extract EXACT numbers**. If text says "805.27", return 805.27. Do not round to "805".
    - `kg` / `kgs` -> Extract as is.
    - `lbs` -> * 0.454.
    - `MT` / `tonnes` -> * 1000.
    - `CBM` / `m3` -> Extract volume.
-   - Round to 2 decimals.
+   - **Unit Typos**: Treat `bcm`, `cmd`, `cbn` as `cbm`.
+   - Round calculated values (like lbs conversion) to 2 decimals.
    - If only `RT` (Revenue Ton) is given, map numeric value to `CBM` and leave Weight `null`.
 
 5. **Noise Filtering**:
@@ -277,7 +280,7 @@ Format: CODE:CanonicalName[Alias1/Alias2/...]
 ### EXAMPLES:
 Input: "Subject: URGENT!!!! shipment S'pore -> Hamburg. Body: 4533kgs (approx), Vol: 9.47 m3. Term: FCA. Need DG rates!!"
 Output: {{
-  "reasoning": "1. S'pore matches Singapore (SGSIN). Hamburg matches Hamburg (DEHAM). 2. Origin SGSIN (not IN) -> Import? No, Destination DEHAM (not IN). Wait, Logic: Origin NOT IN, Dest NOT IN? Fallback: If neither is IN, strictly check if one IS IN. Here none are IN. Wait, if Origin is IN -> Export. Else Import? Let's assume Import if Dest is IN. If neither, check context. But for this specific logic: Origin SGSIN (not IN). Dest DEHAM (not IN). Default to 'pl_sea_import_lcl' or just leave as is? The system handles Import/Export. Actually, if neither is IN, it's Cross Trade? But schema only has import/export. Assume Import for non-IN origin.",
+  "reasoning": "1. S'pore matches Singapore (SGSIN). Hamburg matches Hamburg (DEHAM). 2. Origin SGSIN (not IN). Dest DEHAM (not IN). Default to import. 3. 4533kgs -> 4533.0. 4. DG requested -> true.",
   "product_line": "pl_sea_import_lcl",
   "origin_port_code": "SGSIN",
   "origin_port_name": "Singapore",
@@ -289,7 +292,7 @@ Output: {{
   "is_dangerous": true
 }}
 
-Input: "Madras to Dubai. 500kg. FOB."
+Input: "Madras to Dubai. 500.25kg. FOB."
 Output: {{
   "reasoning": "Madras is alias for Chennai (INMAA). Dubai maps to Jebel Ali (AEJEA). Origin INMAA -> Export.",
   "product_line": "pl_sea_export_lcl",
@@ -298,7 +301,7 @@ Output: {{
   "destination_port_code": "AEJEA",
   "destination_port_name": "Jebel Ali",
   "incoterm": "FOB",
-  "cargo_weight_kg": 500.0,
+  "cargo_weight_kg": 500.25,
   "cargo_cbm": null,
   "is_dangerous": false
 }}
