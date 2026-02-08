@@ -58,7 +58,9 @@ LLM-powered system for extracting structured shipment details from freight forwa
 
 ### v6: The "Resilient" Architect (Current Best)
 
-- **Performance**: **93.8% Overall Accuracy** (tested on messy/difficult data).
+- **Performance (Test Data)**: **93% Overall Accuracy** (tested on messy/difficult data).
+- **Performance (Original Data)**: **85.6% Overall Accuracy** (tested on provided assignment data).
+  - Note: The score on the original data is lower due to intentional "dirty data" in the provided port codes reference file (e.g., KRPUS mapped to Chennai), which we have preserved as part of the assessment challenge.
 - **Why it wins**:
   - **Alias-Aware**: Can map "Madras" -> "Chennai" and "S'pore" -> "Singapore" using a dynamic context injection system.
   - **Typos**: Fuzzy matching handles "Cheenai", "Hamburgh", etc.
@@ -99,13 +101,13 @@ To run this system, you **must** configure your environment variables.
 
 ## Benchmarking Summary (8B Model)
 
-| Metric            | v4 (Standard) | v6 (difficult Data) |
-| :---------------- | :------------ | :------------------ |
-| **Overall Score** | 91.6%         | **93.8%**           |
-| Product Line      | 94.0%         | 80.0%               |
-| Port Precision    | 82.0%         | **98.0%**           |
-| Weight Accuracy   | 90.0%         | 76.0%               |
-| Typos & Aliases   | Fails         | **Handled**         |
+| Metric            | Standard Assignment Data | Test Data |
+| :---------------- | :----------------------- | :-------- |
+| **Overall Score** | **85.6%**                | **93%**   |
+| Product Line      | 62.0%                    | 94.0%     |
+| Port Precision    | 88.0%                    | 98.0%     |
+| Cargo Weight Kg   | 90.0%                    | 90.0%     |
+| Is Dangerous      | 100%                     | 100%      |
 
 ## Edge Cases Handled
 
