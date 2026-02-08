@@ -303,6 +303,9 @@ Output: {{
   "is_dangerous": false
 }}
 
+### OUTPUT STRUCTURE (STRICT JSON):
+Return ONLY a JSON object as formatted in the examples.
+
 ### INPUT:
 {{user_input}}
 """
