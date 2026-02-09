@@ -75,40 +75,6 @@ This system is designed to run **cheaply and effectively** at scale.
 2.  **Smart Context**: Instead of fine-tuning (expensive), we inject a **compressed alias map** into the prompt. This keeps the system flexible—just update `port_codes_reference.json` to teach it new ports without touching code.
 3.  **Speed**: The 8B model on Groq processes emails in **sub-second** time, making it suitable for real-time API integrations.
 
-## Setup for Production
-
-To run this system, you **must** configure your environment variables.
-
-1.  **Create `.env`**:
-    Copy `.env.example` to `.env`.
-
-    ```bash
-    cp .env.example .env
-    ```
-
-2.  **Add your API Key**:
-    You need a valid Groq API key.
-
-    ```env
-    GROQ_API_KEY=gsk_...
-    ```
-
-3.  **Configure System**:
-    Ensure the `PROMPT_VERSION` is set to `v6` to use the latest resilient logic.
-    ```env
-    PROMPT_VERSION=v6
-    ```
-
-## Benchmarking Summary (8B Model)
-
-| Metric            | Standard Assignment Data | Test Data |
-| :---------------- | :----------------------- | :-------- |
-| **Overall Score** | **85.6%**                | **93%**   |
-| Product Line      | 62.0%                    | 94.0%     |
-| Port Precision    | 88.0%                    | 98.0%     |
-| Cargo Weight Kg   | 90.0%                    | 90.0%     |
-| Is Dangerous      | 100%                     | 100%      |
-
 ## Edge Cases Handled
 
 1. **Subject vs Body Conflict (`EMAIL_014`)**:
