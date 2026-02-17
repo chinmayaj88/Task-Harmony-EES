@@ -1,6 +1,5 @@
-from typing import Optional, Any
-from pydantic import BaseModel, Field, validator, field_validator
-import re
+from typing import Optional
+from pydantic import BaseModel, Field, field_validator
 
 class ExtractionResult(BaseModel):
     """Data model for shipping email extraction results."""
@@ -31,4 +30,3 @@ class ExtractionResult(BaseModel):
         if v is not None:
             return round(float(v), 2)
         return v
-

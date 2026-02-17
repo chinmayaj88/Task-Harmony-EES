@@ -136,7 +136,7 @@ if __name__ == "__main__":
     load_dotenv()
     
     gt_path = os.getenv("GROUND_TRUTH_PATH", "data/ground_truth.json")
-    pred_path = os.getenv("OUTPUT_PATH", "output.json")
+    pred_path = os.getenv("OUTPUT_PATH", "outputs/output_v6.json")
     
     evaluator = ShipmentEvaluator(gt_path, pred_path)
     evaluator.calculate_metrics()
