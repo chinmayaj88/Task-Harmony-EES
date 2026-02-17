@@ -6,6 +6,35 @@ This repository is a high-fidelity demonstration of a production-scale AI engine
 
 ---
 
+## 📸 Interactive Demo UI
+
+Experience the AI extraction system through our professional Streamlit interface:
+
+### Main Demo Interface
+
+![Demo UI](screenshots/demo-ui.png)
+_Interactive UI for testing the extraction engine with real-time processing_
+
+### Extraction Results View
+
+![Extraction Results](screenshots/extraction-results.png)
+_Detailed extraction output showing structured data with AI reasoning_
+
+### History & Export
+
+![History View](screenshots/history-view.png)
+_Track all extractions with CSV export capabilities_
+
+**Try it yourself:**
+
+```bash
+streamlit run app.py
+```
+
+See [STREAMLIT_DEMO.md](STREAMLIT_DEMO.md) for complete setup instructions.
+
+---
+
 ## 🏗️ AI System Architecture
 
 The system is built using **Clean Architecture** principles to ensure modularity, testability, and scalability:
